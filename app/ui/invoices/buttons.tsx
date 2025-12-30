@@ -27,6 +27,10 @@ export function UpdateInvoice({ id }: { id: string }) {
 }
 
 export function DeleteInvoice({ id }: { id: string }) {
+  // Cần dùng bind ở đây để truyền trước id vào hàm deleteInvoice,
+  // vì action nhận một function không đối số (sẽ tự động nhận formData khi submit form).
+  // Việc bind(null, id) giúp đảm bảo deleteInvoiceWithId là một hàm sẵn sàng nhận formData từ form,
+  // với id đã được gắn cứng trước.
   const deleteInvoiceWithId = deleteInvoice.bind(null, id);
   return (
     <form action={deleteInvoiceWithId}>
