@@ -1,14 +1,14 @@
 import js from '@eslint/js';
-import importPlugin from 'eslint-plugin-import';
+import { defineConfig, globalIgnores } from 'eslint/config';
+import nextVitals from 'eslint-config-next/core-web-vitals';
 import tseslint from 'typescript-eslint';
 
-export default [
+const eslintConfig = defineConfig([
+  ...nextVitals,
+  globalIgnores(['.next/**', 'out/**', 'build/**', 'next-env.d.ts']),
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
-    plugins: {
-      import: importPlugin,
-    },
     rules: {
       'import/order': [
         'error',
@@ -31,4 +31,6 @@ export default [
       ],
     },
   },
-];
+]);
+
+export default eslintConfig;
